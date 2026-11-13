@@ -39,6 +39,7 @@ button {
   font-weight:bold;
 }
 #status {color:#00ff99;margin:20px;}
+#ping {color:#00ff99;font-size:18px;}
 </style>
 </head>
 <body>
@@ -46,19 +47,25 @@ button {
 <div class="card">
 <h2>VPN Dashboard</h2>
 <p>Select Server</p>
-<select id="server">
-<option>🇵🇭 Philippines</option>
-<option>🇸🇬 Singapore</option>
-<option>🇯🇵 Japan</option>
+<select id="server" onchange="updatePing()">
+<option value="25">🇵🇭 Philippines</option>
+<option value="45">🇸🇬 Singapore</option>
+<option value="60">🇯🇵 Japan</option>
 </select>
+<p id="ping">Demo Ping: 25 ms</p>
 <p id="status">Status: Disconnected</p>
 <button onclick="connect()">CONNECT</button>
 </div>
 <script>
+function updatePing(){
+let ping=document.getElementById("server").value;
+document.getElementById("ping").textContent=
+"Demo Ping: "+ping+" ms";
+}
 function connect(){
-let server=document.getElementById("server").value;
+let server=document.getElementById("server");
 document.getElementById("status").textContent=
-"Demo Mode - Selected: "+server;
+"Demo Mode - Selected: "+server.options[server.selectedIndex].text;
 }
 </script>
 </body>
